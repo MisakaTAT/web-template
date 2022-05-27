@@ -21,7 +21,6 @@ export default defineConfig(() => {
       AutoImport({
         dts: 'src/auto-imports.d.ts',
         imports: ['vue', 'vue-router'],
-
         eslintrc: {
           enabled: true,
           filepath: './.eslintrc-auto-import.json',
