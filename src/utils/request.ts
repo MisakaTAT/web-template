@@ -1,33 +1,50 @@
-import axios from 'axios';
-import auth from '@/utils/auth';
+import { message } from 'ant-design-vue';
+import axios, { AxiosRequestConfig } from 'axios';
+import { useUserStore } from '@/pinia/modules/user';
+
+const SUCCESS = 0;
+
+const REQUEST_TIMEOUT = 5000;
+const REQUEST_BASE_URL = '/api/v1';
 
 // create axios instanse
 const service = axios.create({
-  // baseURL: process.env.,
-  timeout: 5000,
+  baseURL: REQUEST_BASE_URL,
+  timeout: REQUEST_TIMEOUT,
 });
 
 // request interceptors
 service.interceptors.request.use(
   config => {
-    let token = auth.getToken();
-    if (token) {
-      config.headers[auth.TokenKey] = token;
-    }
+    const userStore = useUserStore();
+    config.headers[userStore.TokenKey] = userStore.token;
     return config;
   },
   error => {
-    // handler error
-    return Promise.reject(error);
+    // do something...
   },
 );
 
 // response interceptors
-service.interceptors.response.use(response => {
-  const resp = response.data;
-  if (resp.code !== 0) {
+service.interceptors.response.use(
+  resp => {
+    if (resp.data.code === SUCCESS) {
+      if (resp.data.msg) message.success(resp.data.msg);
+      return resp.data;
+    }
+    message.error(resp.data.msg ? resp.data.msg : '未知错误');
+    return resp.data ? resp.data : null;
+  },
+  err => {
     // do something...
-  }
-});
+  },
+);
 
-export default service;
+// call api
+const request = async <T>(config: AxiosRequestConfig<any>): Promise<T> => {
+  return await (
+    await service(config)
+  ).data;
+};
+
+export default request;

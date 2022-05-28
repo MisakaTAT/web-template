@@ -6,11 +6,9 @@ import { ConfigProvider } from 'ant-design-vue';
 import ProLayout, { PageContainer } from '@ant-design-vue/pro-layout';
 import App from '@/App.vue';
 import router from '@/router';
-import { createPinia } from 'pinia';
+import { pinia } from '@/pinia';
 
-const pinia = createPinia();
-
-let app = createApp(App);
+const app = createApp(App);
 
 app.use(router);
 app.use(pinia);

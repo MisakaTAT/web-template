@@ -7,6 +7,11 @@ export default createRouter({
   history: createWebHashHistory(),
   routes: [
     {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/views/user/Login.vue'),
+    },
+    {
       path: '/',
       name: 'index',
       meta: { title: '首页' },
