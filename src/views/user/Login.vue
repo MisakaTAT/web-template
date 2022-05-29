@@ -42,6 +42,7 @@
 import { Row } from 'ant-design-vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 import { useUserStore } from '@/pinia/modules/user';
+import router from '@/router';
 
 const formState = reactive({
   username: '',
@@ -51,8 +52,9 @@ const formState = reactive({
 
 const onFinish = async (values: any) => {
   const userStore = useUserStore();
-  const flag = await userStore.Login(values);
-  // console.log('Success:', values);
+  await userStore.Login(values).then(flag => {
+    if (flag) router.push('/dashboard');
+  });
 };
 
 const onFinishFailed = (errorInfo: any) => {

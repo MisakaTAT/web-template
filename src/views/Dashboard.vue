@@ -17,11 +17,10 @@
 </template>
 
 <script lang="ts" setup>
-import { message } from 'ant-design-vue';
 import { PageContainer as PageContainer } from '@ant-design-vue/pro-layout';
+import { message } from 'ant-design-vue';
 
-const handleClick = () => {
-  console.log('info');
-  message.info('BackHome button clicked!');
+const handleClick = async () => {
+  message.info('Hi');
 };
 </script>

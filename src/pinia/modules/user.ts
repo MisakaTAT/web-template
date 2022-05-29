@@ -6,23 +6,32 @@ export const useUserStore = defineStore('user', () => {
 
   const token = ref(window.localStorage.getItem(TokenKey) || '');
 
-  const setToken = val => {
+  const setToken = (val: string) => {
     token.value = val;
+  };
+
+  const removeToken = () => {
+    window.localStorage.removeItem(TokenKey);
   };
 
   watch(token, () => {
     window.localStorage.setItem(TokenKey, token.value);
   });
 
-  const Login = async loginInfo => {
+  const Login = async (loginInfo: any): Promise<Boolean> => {
     const resp = await login(loginInfo);
-    if (resp.token) setToken(resp.token);
+    if (resp?.token) {
+      setToken(resp.token);
+      return true;
+    }
+    return false;
   };
 
   return {
     TokenKey,
     token,
     setToken,
+    removeToken,
     Login,
   };
 });
