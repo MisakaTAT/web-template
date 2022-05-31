@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { login } from '@/api/user';
+import router from '@/router';
 
 export const useUserStore = defineStore('user', () => {
   const TokenKey = 'Token';
@@ -27,11 +28,17 @@ export const useUserStore = defineStore('user', () => {
     return false;
   };
 
+  const Logout = () => {
+    // TODO: Wait optimze
+    removeToken();
+    router.push('/login');
+    window.location.reload();
+  };
+
   return {
     TokenKey,
     token,
-    setToken,
-    removeToken,
     Login,
+    Logout,
   };
 });

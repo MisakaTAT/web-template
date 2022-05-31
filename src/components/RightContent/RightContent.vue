@@ -13,7 +13,7 @@
               </template>
               <span>个人设置</span>
             </a-menu-item>
-            <a-menu-item>
+            <a-menu-item @click="logout()">
               <template #icon>
                 <logout-outlined />
               </template>
@@ -37,15 +37,20 @@ import {
   BgColorsOutlined,
 } from '@ant-design/icons-vue';
 import { apply, randomTheme } from '@/hooks/useTheme';
+import { useUserStore } from '@/pinia/modules/user';
 
 export type CurrentUser = {
-  nickname: string;
-  avatar?: string;
+  avatar: string;
 };
 
 defineProps<{
   currentUser: CurrentUser;
 }>();
+
+const logout = () => {
+  const useUser = useUserStore();
+  useUser.Logout();
+};
 
 const handleClick = () => {
   apply(randomTheme());

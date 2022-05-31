@@ -7,7 +7,7 @@ const Failed = -1;
 const Succeed = 0;
 const Unauthorized = 101;
 
-const REQUEST_TIMEOUT = 1000;
+const REQUEST_TIMEOUT = 5000;
 const REQUEST_BASE_URL = '/api/v1';
 
 // create axios instanse
@@ -40,8 +40,7 @@ service.interceptors.response.use(
     // check token
     if (code === Unauthorized) {
       const userStore = useUserStore();
-      userStore.removeToken();
-      router.push('/login');
+      userStore.Logout();
     }
     message.error(resp.data.msg ? resp.data.msg : '未知错误');
     return resp.data ? resp.data : null;

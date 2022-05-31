@@ -17,4 +17,6 @@ app.use(ConfigProvider);
 app.use(ProLayout);
 app.use(PageContainer);
 
-app.mount('#app');
+router.isReady().then(() => {
+  app.mount('#app');
+});

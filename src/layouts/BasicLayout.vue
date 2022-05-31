@@ -73,8 +73,11 @@ const breadcrumb = computed(() =>
 );
 
 const currentUser = reactive({
-  nickname: 'Admin',
-  avatar: 'https://mikuac.com/images/zero.jpg',
+  avatar: '',
+});
+
+onMounted(() => {
+  currentUser.avatar = 'https://mikuac.com/images/zero.jpg';
 });
 
 watch(
