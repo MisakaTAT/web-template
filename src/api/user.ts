@@ -6,7 +6,7 @@ interface LoginResp {
   token: string;
 }
 
-export function login(data: AxiosRequestConfig<any>) {
+export function loginReq(data: AxiosRequestConfig<any>) {
   return request<LoginResp>({
     url: '/auth/login',
     method: 'POST',

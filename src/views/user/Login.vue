@@ -52,7 +52,7 @@ const formState = reactive({
 
 const onFinish = async (values: any) => {
   const userStore = useUserStore();
-  await userStore.Login(values).then(flag => {
+  await userStore.login(values).then(flag => {
     if (flag) router.push('/');
   });
 };

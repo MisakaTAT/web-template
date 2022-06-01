@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { login } from '@/api/user';
+import { loginReq } from '@/api/user';
 import router from '@/router';
 
 export const useUserStore = defineStore('user', () => {
@@ -7,38 +7,27 @@ export const useUserStore = defineStore('user', () => {
 
   const token = ref(window.localStorage.getItem(TokenKey) || '');
 
-  const setToken = (val: string) => {
-    token.value = val;
-  };
-
-  const removeToken = () => {
-    window.localStorage.removeItem(TokenKey);
-  };
-
   watch(token, () => {
     window.localStorage.setItem(TokenKey, token.value);
   });
 
-  const Login = async (loginInfo: any): Promise<Boolean> => {
-    const resp = await login(loginInfo);
-    if (resp?.token) {
-      setToken(resp.token);
-      return true;
-    }
-    return false;
+  const login = async (loginInfo: any): Promise<Boolean> => {
+    const resp = await loginReq(loginInfo);
+    if (!resp?.token) return false;
+    token.value = resp.token;
+    return true;
   };
 
-  const Logout = () => {
-    // TODO: Wait optimze
-    removeToken();
-    router.push('/login');
+  const logout = () => {
+    window.localStorage.removeItem(TokenKey);
+    // router.push('/login');
     window.location.reload();
   };
 
   return {
     TokenKey,
     token,
-    Login,
-    Logout,
+    login,
+    logout,
   };
 });

@@ -1,7 +1,6 @@
 import { message } from 'ant-design-vue';
 import axios, { AxiosRequestConfig } from 'axios';
 import { useUserStore } from '@/pinia/modules/user';
-import router from '@/router';
 
 const Failed = -1;
 const Succeed = 0;
@@ -40,7 +39,7 @@ service.interceptors.response.use(
     // check token
     if (code === Unauthorized) {
       const userStore = useUserStore();
-      userStore.Logout();
+      userStore.logout();
     }
     message.error(resp.data.msg ? resp.data.msg : '未知错误');
     return resp.data ? resp.data : null;

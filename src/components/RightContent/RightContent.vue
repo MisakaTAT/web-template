@@ -48,8 +48,8 @@ defineProps<{
 }>();
 
 const logout = () => {
-  const useUser = useUserStore();
-  useUser.Logout();
+  const userStore = useUserStore();
+  userStore.logout();
 };
 
 const handleClick = () => {
