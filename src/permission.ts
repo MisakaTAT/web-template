@@ -14,7 +14,6 @@ router.beforeEach((to, _, next) => {
   const userStore = useUserStore();
   if (userStore.token) {
     // if is logged in, redirect to the home page
-    console.log(to.name);
     if (to.name === 'Login') {
       next({ name: 'Index' });
       NProgress.done();

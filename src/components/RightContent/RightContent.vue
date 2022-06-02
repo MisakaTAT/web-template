@@ -38,7 +38,6 @@ import {
 } from '@ant-design/icons-vue';
 import { apply, randomTheme } from '@/hooks/useTheme';
 import { useUserStore } from '@/pinia/modules/user';
-import router from '@/router';
 
 export type CurrentUser = {
   avatar: string;
