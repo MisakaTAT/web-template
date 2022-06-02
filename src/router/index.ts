@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'index',
+    name: 'Index',
     meta: { title: '首页' },
     component: BasicLayout,
     redirect: '/dashboard',

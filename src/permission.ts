@@ -7,15 +7,16 @@ NProgress.configure({ showSpinner: false });
 
 const whiteList = ['/login'];
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   // start progress bar
   NProgress.start();
 
   const userStore = useUserStore();
   if (userStore.token) {
     // if is logged in, redirect to the home page
-    if (to.path === '/login') {
-      next('/');
+    console.log(to.name);
+    if (to.name === 'Login') {
+      next({ name: 'Index' });
       NProgress.done();
     } else {
       next();
@@ -24,7 +25,7 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
       next();
     } else {
-      next('/login');
+      next({ name: 'Login' });
       NProgress.done();
     }
   }

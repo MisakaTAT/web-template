@@ -19,7 +19,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const userStore = useUserStore();
-    config.headers[userStore.TokenKey] = userStore.token;
+    config.headers[userStore.TOKEN_KEY] = userStore.token;
     return config;
   },
   err => {

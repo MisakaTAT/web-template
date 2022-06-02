@@ -31,7 +31,9 @@
         </a-form-item>
 
         <a-form-item>
-          <a-button class="login-button" type="primary" html-type="submit">登录</a-button>
+          <a-button class="login-button" type="primary" html-type="submit" :loading="loading"
+            >登录</a-button
+          >
         </a-form-item>
       </a-form>
     </div>
@@ -50,11 +52,15 @@ const formState = reactive({
   remember: true,
 });
 
+const loading = ref(false);
+
 const onFinish = async (values: any) => {
+  loading.value = true;
   const userStore = useUserStore();
   await userStore.login(values).then(flag => {
-    if (flag) router.push('/');
+    if (flag) router.push({ name: 'Index' });
   });
+  loading.value = false;
 };
 
 const onFinishFailed = (errorInfo: any) => {

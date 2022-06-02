@@ -84,7 +84,7 @@ watch(
   router.currentRoute,
   () => {
     const matched = router.currentRoute.value.matched.concat();
-    state.selectedKeys = matched.filter(r => r.name !== 'index').map(r => r.path);
+    state.selectedKeys = matched.filter(r => r.name !== 'Index').map(r => r.path);
     state.openKeys = matched
       .filter(r => r.path !== router.currentRoute.value.path)
       .map(r => r.path);

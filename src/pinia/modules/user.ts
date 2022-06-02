@@ -3,29 +3,28 @@ import { loginReq } from '@/api/user';
 import router from '@/router';
 
 export const useUserStore = defineStore('user', () => {
-  const TokenKey = 'Token';
+  const TOKEN_KEY = 'X-Token';
 
-  const token = ref(window.localStorage.getItem(TokenKey) || '');
+  const token = ref(window.localStorage.getItem(TOKEN_KEY) || '');
 
   watch(token, () => {
-    window.localStorage.setItem(TokenKey, token.value);
+    window.localStorage.setItem(TOKEN_KEY, token.value);
   });
 
-  const login = async (loginInfo: any): Promise<Boolean> => {
-    const resp = await loginReq(loginInfo);
+  const login = async (authInfo: any): Promise<Boolean> => {
+    const resp = await loginReq(authInfo);
     if (!resp?.token) return false;
     token.value = resp.token;
     return true;
   };
 
   const logout = () => {
-    window.localStorage.removeItem(TokenKey);
-    // router.push('/login');
-    window.location.reload();
+    token.value = '';
+    router.push({ name: 'Login' });
   };
 
   return {
-    TokenKey,
+    TOKEN_KEY,
     token,
     login,
     logout,
