@@ -1,6 +1,6 @@
 import { message } from 'ant-design-vue';
 import axios, { AxiosRequestConfig } from 'axios';
-import { useUserStore } from '@/pinia/modules/user';
+import { TOKEN_KEY, useUserStore } from '@/pinia/modules/user';
 
 const Failed = -1;
 const Succeed = 0;
@@ -19,7 +19,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const userStore = useUserStore();
-    config.headers[userStore.TOKEN_KEY] = userStore.token;
+    config.headers[TOKEN_KEY] = userStore.token;
     return config;
   },
   err => {

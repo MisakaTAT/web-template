@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { useRouter, RouterView, RouterLink } from 'vue-router';
 import { getMenuData, clearMenuItem, type RouteContextProps } from '@ant-design-vue/pro-layout';
+import { userInfoReq } from '@/api/user';
 
 const router = useRouter();
 
@@ -77,7 +78,9 @@ const currentUser = reactive({
 });
 
 onMounted(() => {
-  currentUser.avatar = 'https://mikuac.com/images/zero.jpg';
+  userInfoReq().then(resp => {
+    currentUser.avatar = resp?.avatar || '';
+  });
 });
 
 watch(

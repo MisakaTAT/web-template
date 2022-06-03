@@ -17,15 +17,10 @@
 </template>
 
 <script lang="ts" setup>
-import request from '@/utils/request';
 import { PageContainer as PageContainer } from '@ant-design-vue/pro-layout';
 import { message } from 'ant-design-vue';
 
 const handleClick = () => {
-  // message.info('Hi');
-  return request({
-    url: '/user/list',
-    method: 'GET',
-  });
+  message.info('Hi');
 };
 </script>

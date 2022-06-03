@@ -4,10 +4,9 @@
       <a-form
         class="user-layout-login"
         :model="formState"
-        name="basic"
+        name="login"
         autocomplete="off"
         @finish="onFinish"
-        @finishFailed="onFinishFailed"
       >
         <a-form-item name="username" :rules="[{ required: true, message: '请输入用户名!' }]">
           <a-input v-model:value="formState.username" size="large" placeholder="用户名">
@@ -49,7 +48,7 @@ import router from '@/router';
 const formState = reactive({
   username: '',
   password: '',
-  remember: true,
+  remember: false,
 });
 
 const loading = ref(false);
@@ -61,10 +60,6 @@ const onFinish = async (values: any) => {
     if (flag) router.push({ name: 'Index' });
   });
   loading.value = false;
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
 };
 </script>
 
