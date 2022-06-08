@@ -4,7 +4,6 @@ import { TOKEN_KEY, useUserStore } from '@/pinia/modules/user';
 
 const Ok = 0;
 const Fail = -1;
-const OkMsg = 'ok';
 
 const REQUEST_TIMEOUT = 5000;
 const REQUEST_BASE_URL = '/api/v1';
@@ -33,7 +32,7 @@ service.interceptors.response.use(
   resp => {
     const code = resp?.data.code == undefined ? Fail : resp?.data.code;
     if (code === Ok) {
-      if (resp.data.msg && resp.data.msg !== OkMsg) message.success(resp.data.msg);
+      if (resp.data.msg) message.success(resp.data.msg);
       return resp.data;
     }
     // auth
