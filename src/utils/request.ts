@@ -2,9 +2,9 @@ import { message } from 'ant-design-vue';
 import axios, { AxiosRequestConfig } from 'axios';
 import { TOKEN_KEY, useUserStore } from '@/pinia/modules/user';
 
-const Failed = -1;
-const Succeed = 0;
-const Unauthorized = 101;
+const Ok = 0;
+const Fail = -1;
+const OkMsg = 'ok';
 
 const REQUEST_TIMEOUT = 5000;
 const REQUEST_BASE_URL = '/api/v1';
@@ -31,13 +31,13 @@ service.interceptors.request.use(
 // response interceptors
 service.interceptors.response.use(
   resp => {
-    const code = resp?.data.code == undefined ? Failed : resp?.data.code;
-    if (code === Succeed) {
-      if (resp.data.msg) message.success(resp.data.msg);
+    const code = resp?.data.code == undefined ? Fail : resp?.data.code;
+    if (code === Ok) {
+      if (resp.data.msg && resp.data.msg !== OkMsg) message.success(resp.data.msg);
       return resp.data;
     }
-    // check token
-    if (code === Unauthorized) {
+    // auth
+    if (!resp?.data?.data?.auth) {
       const userStore = useUserStore();
       userStore.logout();
     }

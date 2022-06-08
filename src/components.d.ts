@@ -4,20 +4,20 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AAvatar: typeof import('ant-design-vue/es')['Avatar'];
-    AButton: typeof import('ant-design-vue/es')['Button'];
-    ACheckbox: typeof import('ant-design-vue/es')['Checkbox'];
-    ADropdown: typeof import('ant-design-vue/es')['Dropdown'];
-    AForm: typeof import('ant-design-vue/es')['Form'];
-    AFormItem: typeof import('ant-design-vue/es')['FormItem'];
-    AInput: typeof import('ant-design-vue/es')['Input'];
-    AInputPassword: typeof import('ant-design-vue/es')['InputPassword'];
-    AMenu: typeof import('ant-design-vue/es')['Menu'];
-    AMenuItem: typeof import('ant-design-vue/es')['MenuItem'];
-    AResult: typeof import('ant-design-vue/es')['Result'];
-    ASpace: typeof import('ant-design-vue/es')['Space'];
-    RightContent: typeof import('./components/RightContent/RightContent.vue')['default'];
+    AAvatar: typeof import('ant-design-vue/es')['Avatar']
+    AButton: typeof import('ant-design-vue/es')['Button']
+    ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
+    ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AForm: typeof import('ant-design-vue/es')['Form']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AInput: typeof import('ant-design-vue/es')['Input']
+    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
+    AMenu: typeof import('ant-design-vue/es')['Menu']
+    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    AResult: typeof import('ant-design-vue/es')['Result']
+    ASpace: typeof import('ant-design-vue/es')['Space']
+    RightContent: typeof import('./components/RightContent/RightContent.vue')['default']
   }
 }
 
-export {};
+export { }
