@@ -50,7 +50,7 @@ service.interceptors.response.use(
 );
 
 // call api
-const request = async <T>(config: AxiosRequestConfig<any>): Promise<T> => {
+const request = async <T>(config: AxiosRequestConfig<T>): Promise<T> => {
   return await (
     await service(config)
   )?.data;
